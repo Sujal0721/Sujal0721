@@ -1,5 +1,6 @@
 ## Hi there 👋
-This is my first intership
+This is my first intership.
+-Authors: SUJAL PATIL.
 
 
 <!--
