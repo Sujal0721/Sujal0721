@@ -1,1 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100%;
+            background: linear-gradient(to right, #6a11cb, #2575fc, #00c6ff);
+            margin: 0;
+            background-color: #ffffff;
+            transition: background-color 0.5s ease;
+        }
 
+        .calculator {
+            background: #000000;
+            border-radius: 20px;
+            box-shadow: 1111px 110px rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            width: 390px;
+        }
+
+        .display {
+            background: #ffffff;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            padding:10px;
+            width: 90%;
+            text-align: right;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 2rem;
+            padding: 15px;
+            cursor: pointer;
+            transition: background 0.5s ease;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button.clear {
+            background: #ff4d4d;
+        }
+
+        button.clear:hover {
+            background: #cc0000;
+        }
+
+        .bg-toggle {
+            margin-top: 1px;
+            border-radius: 52%;
+            text-align: center;
+        }
+
+        .bg-toggle button {
+            background: #851818;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background 0.5s ease;
+        }
+
+        .bg-toggle button:hover {
+            background: #53ba22;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" class="display" disabled placeholder="Enter Your Number Here">
+        <div class="buttons">
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('/')">&#247;</button>
+
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('*')">&#215;</button>
+
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('-')">&#8722;</button>
+
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendValue('+')">&#43;</button>
+
+            <button class="clear" onclick="clearDisplay()">C</button>
+        </div>
+        <div class="bg-toggle">
+            <button onclick="toggleBackgroundColor()">Change Background</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+        let currentColor = '#ffffff';
+        let isDarkMode = false;
+
+        function appendValue(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+
+        function toggleBackgroundColor() {
+            isDarkMode = !isDarkMode;
+            currentColor = isDarkMode ? '#d4f3ef' : '#ffffff';
+            document.body.style.backgroundColor = currentColor;
+            document.querySelector('.calculator').style.background = isDarkMode ? '#333' : '#000';
+            document.querySelectorAll('button').forEach(button => {
+                button.style.background = isDarkMode ? '#555' : '#007bff';
+                button.style.color = isDarkMode ? '#fff' : '#fff';
+            });
+            document.querySelector('.bg-toggle button').style.background = isDarkMode ? '#851818' : '#851818';
+        }
+    </script>
+</body>
+</html>
